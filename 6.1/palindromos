@@ -1,1 +1,44 @@
 
+import re
+
+class DetectorPalindromo:
+    def __init__(self):
+        self.texto = ''
+        self.letras_original = []
+        self.letras_invertidas = []
+
+    def ingresar_texto(self):
+        self.texto = input('Ingrese una palabra: ').lower()
+
+    def procesar_texto(self):
+        for letra in self.texto:
+            self.letras_original.append(letra)
+            self.letras_invertidas.append(letra)
+
+    def revertir_texto(self):
+        self.letras_invertidas.reverse()
+
+    def validar_texto(self):
+        return bool(re.fullmatch(r'[a-z]+', self.texto))
+
+    def analizar_palindromo(self):
+        if self.validar_texto():
+            if self.letras_original == self.letras_invertidas:
+                print(f'La palabra "{self.texto}" es un palíndromo.')
+            else:
+                print(f'La palabra "{self.texto}" NO es un palíndromo.')
+        else:
+            raise ExcepcionPalindromo('Error: El texto contiene números, espacios o caracteres no permitidos.')
+
+class ExcepcionPalindromo(Exception):
+    def __init__(self, mensaje):
+        super().__init__(mensaje)
+
+try:
+    analizador = DetectorPalindromo()
+    analizador.ingresar_texto()
+    analizador.procesar_texto()
+    analizador.revertir_texto()
+    analizador.analizar_palindromo()
+except ExcepcionPalindromo as error:
+    print(f'{error}')
