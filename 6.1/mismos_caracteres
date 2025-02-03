@@ -1,1 +1,42 @@
+class PalabrasSimilares:
+    def __init__(self):
+        self.palabras = []
+        self.total_palabras = 0
+
+    def definir_cantidad(self):
+        while True:
+            try:
+                self.total_palabras = int(input("Ingrese la cantidad de palabras a analizar: "))
+                break
+            except ValueError:
+                raise ValueError("ERROR: Por favor, ingrese un número válido.")
+
+    def ingresar_palabras(self):
+        for indice in range(self.total_palabras):
+            termino = input(f'Ingrese la palabra {indice + 1}: ')
+            self.palabras.append(termino)
+
+    def verificar_similitud(self):
+        conjunto_similares = []
+        for i in range(len(self.palabras)):
+            for j in range(i + 1, len(self.palabras)):
+                if sorted(self.palabras[i]) == sorted(self.palabras[j]):
+                    if self.palabras[i] not in conjunto_similares:
+                        conjunto_similares.append(self.palabras[i])
+                    if self.palabras[j] not in conjunto_similares:
+                        conjunto_similares.append(self.palabras[j])
+
+        if not conjunto_similares:
+            print('No hay palabras que compartan los mismos caracteres.')
+            return ''
+
+        print(f'Las palabras que contienen los mismos caracteres son: {conjunto_similares}')
+
+try:
+    analizador = PalabrasSimilares()
+    analizador.definir_cantidad()
+    analizador.ingresar_palabras()
+    analizador.verificar_similitud()
+except Exception as e:
+    print(f'Error: {e}')
 
