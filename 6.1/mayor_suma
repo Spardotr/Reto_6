@@ -1,1 +1,35 @@
-x
+class mayor_suma:
+    def __init__(self):
+        self.numeros = []
+
+    def agregar_numeros(self):
+        while True:
+            try:
+                cantidad = int(input("Indique cuántos números desea ingresar en la lista: "))
+                for indice in range(cantidad):
+                    numero = int(input(f"Ingrese el número {indice + 1}: "))
+                    self.numeros.append(numero)
+                break
+            except ValueError:
+                raise ValueError("ERROR: El dato ingresado no es un número válido. Inténtelo nuevamente.")
+
+    def encontrar_mayor_suma(self):
+        max_suma = 0
+        num1 = 0
+        num2 = 0
+
+        for indice in range(len(self.numeros) - 1):
+            suma_actual = self.numeros[indice] + self.numeros[indice + 1]
+            if suma_actual > max_suma:
+                max_suma = suma_actual
+                num1 = self.numeros[indice]
+                num2 = self.numeros[indice + 1]
+
+        print(f"La mayor suma entre elementos consecutivos es {num1} + {num2} = {max_suma}")
+
+try:
+    calculo = mayor_suma()
+    calculo.agregar_numeros()
+    calculo.encontrar_mayor_suma()
+except Exception as e:
+    print(f'Error: {e}')
