@@ -1,1 +1,49 @@
 
+class operaciones_aritmeticas:
+    def __init__(self):
+        self.numero_uno = None
+        self.numero_dos = None
+        self.simbolo = ''
+        
+    def asignar_valores(self):
+        while True:
+            try: 
+                self.numero_uno = int(input('Ingrese el primer valor: '))
+                self.numero_dos = int(input('Ingrese el segundo valor: '))
+                self.simbolo = input('Ingrese el operador matemático: ')
+                break
+            except ValueError:
+                raise ValueError('Los datos ingresados no son válidos, deben ser números enteros.')
+        
+    def realizar_operacion(self):
+        """
+        Realiza una operación matemática entre dos números según el operador ingresado.
+
+        para self.numero_uno: Primer número de la operación.
+        para self.numero_dos: Segundo número de la operación.
+        para self.simbolo: Operador a utilizar en la operación ('+', '-', '*', '/').
+        return: Resultado de la operación.
+        """
+        match self.simbolo:  # Se usa match-case para determinar la operación a ejecutar.
+            case '+':  
+                resultado = self.numero_uno + self.numero_dos
+            case '-': 
+                resultado = self.numero_uno - self.numero_dos
+            case '*':  
+                resultado = self.numero_uno * self.numero_dos
+            case '/':  
+                if self.numero_dos == 0:
+                    raise ZeroDivisionError('Error: No es posible dividir entre cero.')
+                else:
+                    resultado = self.numero_uno / self.numero_dos
+            case _:  # Caso por defecto si el operador no es válido.
+                raise ValueError('Operador no reconocido. Por favor intente de nuevo.')
+
+        print(f'El resultado de {self.numero_uno} {self.simbolo} {self.numero_dos} es: {resultado}')
+        
+try:
+    calculo = operaciones_aritmeticas()
+    calculo.asignar_valores()
+    calculo.realizar_operacion()
+except Exception as e:
+    print(f'Error: {e}')
