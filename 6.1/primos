@@ -1,1 +1,45 @@
+class Primos:
+    def __init__(self):
+        self.numeros = []
+
+    def ingresar_numeros(self):
+        """
+        Solicita al usuario la cantidad de números a evaluar y los valores correspondientes.
+        """
+        while True:
+            try:
+                total = int(input("Ingrese la cantidad de números a evaluar: "))
+                if total == 0:
+                    raise ValueError("ERROR: La cantidad de números no puede ser cero.")
+                break
+            except ValueError:
+                raise ValueError("ERROR: Por favor, ingrese un número válido.")
+
+        for indice in range(total):
+            valor = int(input(f"Ingrese el número {indice + 1}: "))
+            self.numeros.append(valor)
+
+    def detectar_primos(self):
+        """
+        Identifica y muestra los números primos de la lista ingresada.
+        """
+        primos_detectados = []
+        for numero in self.numeros:
+            if numero > 1:
+                for divisor in range(2, int(numero**0.5) + 1):
+                    if numero % divisor == 0:
+                        break
+                else:
+                    primos_detectados.append(numero)
+
+        print("Los números primos dentro de la lista ingresada son:")
+        for primo in primos_detectados:
+            print(primo, end=" ")
+
+try: 
+    detector = Primos()
+    detector.ingresar_numeros()
+    detector.detectar_primos()
+except Exception as e:
+    print(f'Error: {e}')
 
