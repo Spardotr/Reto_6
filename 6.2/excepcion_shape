@@ -1,1 +1,135 @@
+from ShapeExceptions.triangle import Triangulo, Equilatero, Isosceles, Escaleno, TriRectangulo
+from ShapeExceptions.rectangle import Rectangulo, Cuadrado
+from ShapeExceptions.point import Punto
 
+def main():
+    print('RECTÁNGULO')
+
+    try:
+        x_rect = float(input('Ingrese la coordenada x del punto inicial: '))
+        y_rect = float(input('Ingrese la coordenada y del punto inicial: '))
+        ancho_rect = float(input('Ingrese el ancho: '))
+        alto_rect = float(input('Ingrese el alto: '))
+    except ValueError:
+        raise ValueError("Error: Las coordenadas y dimensiones deben ser valores numéricos.")
+
+    if ancho_rect <= 0 or alto_rect <= 0:
+        raise ValueError("Error: Las dimensiones deben ser positivas.")
+
+    rectangulo = Rectangulo(Punto(x_rect, y_rect), ancho_rect, alto_rect)
+
+    print("Área:", rectangulo.compute_area())
+    print("Perímetro:", rectangulo.compute_perimeter())
+    print("Vértices:", rectangulo.get_vertices())
+    print("Lados:", rectangulo.get_edges())
+    print("Longitud de los lados:", rectangulo.get_edge_lengths())
+    print("Ángulos:", rectangulo.get_inner_angles())
+
+    print('\n=========================================')
+    print("CUADRADO")
+
+    try:
+        x_cuad = float(input('Ingrese la coordenada x del punto inicial: '))
+        y_cuad = float(input('Ingrese la coordenada y del punto inicial: '))
+        lado_cuad = float(input('Ingrese el valor del lado: '))
+    except ValueError:
+        raise ValueError("Error: Las coordenadas deben ser valores numéricos.")
+
+    if lado_cuad <= 0:
+        raise ValueError("Error: El lado debe ser un valor positivo.")
+
+    cuadrado = Cuadrado(Punto(x_cuad, y_cuad), lado_cuad)
+
+    print("Área:", cuadrado.compute_area())
+    print("Perímetro:", cuadrado.compute_perimeter())
+    print("Vértices:", cuadrado.get_vertices())
+    print("Lados:", cuadrado.get_edges())
+    print("Longitud de los lados:", cuadrado.get_edge_lengths())
+    print("Ángulos:", cuadrado.get_inner_angles())
+
+    print('\n=========================================')
+    print("TRIÁNGULO EQUILÁTERO")
+
+    try:
+        x_equil = float(input('Ingrese la coordenada x del primer punto: '))
+        y_equil = float(input('Ingrese la coordenada y del primer punto: '))
+        lado_equil = float(input('Ingrese el valor del lado: '))
+    except ValueError:
+        raise ValueError("Error: Las coordenadas deben ser valores numéricos.")
+
+    equilatero = Equilatero(Punto(x_equil, y_equil), lado_equil)
+
+    print("Área:", equilatero.compute_area())
+    print("Perímetro:", equilatero.compute_perimeter())
+    print("Vértices:", equilatero.get_vertices())
+    print("Lados:", equilatero.get_edges())
+    print("Longitud de los lados:", equilatero.get_edge_lengths())
+    print("Ángulos:", equilatero.get_inner_angles())
+
+    print('\n=========================================')
+    print("TRIÁNGULO ISÓSCELES")
+
+    try:
+        x_iso = float(input('Ingrese la coordenada x del primer punto: '))
+        y_iso = float(input('Ingrese la coordenada y del primer punto: '))
+        base_iso = float(input('Ingrese la base: '))
+        lado_iso = float(input('Ingrese el lado: '))
+    except ValueError:
+        raise ValueError("Error: Las coordenadas deben ser valores numéricos.")
+
+    isosceles = Isosceles(Punto(x_iso, y_iso), base_iso, lado_iso)
+
+    print("Área:", isosceles.compute_area())
+    print("Perímetro:", isosceles.compute_perimeter())
+    print("Vértices:", isosceles.get_vertices())
+    print("Lados:", isosceles.get_edges())
+    print("Longitud de los lados:", isosceles.get_edge_lengths())
+    print("Ángulos:", isosceles.get_inner_angles())
+
+    print('\n=========================================')
+    print("TRIÁNGULO RECTÁNGULO")
+
+    try:
+        x_rect_tri = float(input('Ingrese la coordenada x del primer punto: '))
+        y_rect_tri = float(input('Ingrese la coordenada y del primer punto: '))
+        base_rect_tri = float(input('Ingrese la base: '))
+        altura_rect_tri = float(input('Ingrese la altura: '))
+    except ValueError:
+        raise ValueError("Error: Las coordenadas deben ser valores numéricos.")
+
+    rectangulo_tri = RectanguloTri(Punto(x_rect_tri, y_rect_tri), base_rect_tri, altura_rect_tri)
+
+    print("Área:", rectangulo_tri.compute_area())
+    print("Perímetro:", rectangulo_tri.compute_perimeter())
+    print("Vértices:", rectangulo_tri.get_vertices())
+    print("Lados:", rectangulo_tri.get_edges())
+    print("Longitud de los lados:", rectangulo_tri.get_edge_lengths())
+    print("Ángulos:", rectangulo_tri.get_inner_angles())
+
+    print('\n=========================================')
+    print("TRIÁNGULO ESCALENO")
+
+    try:
+        x_esca1 = float(input('Ingrese la coordenada x del primer punto: '))
+        y_esca1 = float(input('Ingrese la coordenada y del primer punto: '))
+        x_esca2 = float(input('Ingrese la coordenada x del segundo punto: '))
+        y_esca2 = float(input('Ingrese la coordenada y del segundo punto: '))
+        x_esca3 = float(input('Ingrese la coordenada x del tercer punto: '))
+        y_esca3 = float(input('Ingrese la coordenada y del tercer punto: '))
+    except ValueError:
+        raise ValueError("Error: Las coordenadas deben ser valores numéricos.")
+
+    escaleno = Escaleno(Punto(x_esca1, y_esca1), Punto(x_esca2, y_esca2), Punto(x_esca3, y_esca3))
+
+    print("Área:", escaleno.compute_area())
+    print("Perímetro:", escaleno.compute_perimeter())
+    print("Vértices:", escaleno.get_vertices())
+    print("Lados:", escaleno.get_edges())
+    print("Longitud de los lados:", escaleno.get_edge_lengths())
+    print("Ángulos:", escaleno.get_inner_angles())
+
+if __name__ == "__main__":
+    try: 
+        main()
+    except ValueError as error:
+        print(f'Error: {error}')
